@@ -25,7 +25,9 @@ const Register = () => {
       setSuccess('Registration successful! Redirecting to login...');
       setTimeout(() => navigate('/login'), 2000);
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed. Username might be taken.');
+      const serverMsg = err.response?.data?.message;
+      setError(serverMsg || `Registration failed: ${err.message}`);
+      console.error("Registration Error:", err);
     }
   };
 

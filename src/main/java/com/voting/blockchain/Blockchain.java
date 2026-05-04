@@ -11,6 +11,9 @@ public class Blockchain {
 
     public Blockchain() {
         this.chain = new ArrayList<>();
+        // Add Genesis Block
+        Block genesisBlock = new Block(0, "0", "Genesis Block");
+        this.chain.add(genesisBlock);
     }
 
     public Blockchain(List<Block> existingChain) {
