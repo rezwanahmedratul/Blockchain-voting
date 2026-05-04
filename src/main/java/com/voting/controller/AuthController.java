@@ -1,0 +1,30 @@
+package com.voting.controller;
+
+import com.voting.dto.request.LoginRequest;
+import com.voting.dto.request.RegisterRequest;
+import com.voting.dto.response.AuthResponse;
+import com.voting.dto.response.MessageResponse;
+import com.voting.service.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+
+    @Autowired
+    private AuthService authService;
+
+    @PostMapping("/register")
+    public ResponseEntity<MessageResponse> register(@RequestBody RegisterRequest request) {
+        authService.registerUser(request);
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
+        AuthResponse response = authService.loginUser(request);
+        return ResponseEntity.ok(response);
+    }
+}
