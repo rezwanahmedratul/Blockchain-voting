@@ -71,8 +71,17 @@ The frontend is located in the `/frontend` directory and runs on port `3000`.
 
 ---
 
-## 4. Current Status & Next Steps
+## 4. Network & Infrastructure Configurations
+During deployment, the following specific configurations were established to expose the system externally:
+- **Database:** The backend was configured to connect to an external MariaDB server at `10.0.0.32:3306` (`application.properties`).
+- **Backend Network:** Spring Boot was bound to `0.0.0.0` (`server.address=0.0.0.0`) to accept connections from any interface.
+- **Frontend Network:** Vite was configured with `--host` to expose the UI to the local network, and explicitly allowed the domain `vote.ratul.fun` via the `allowedHosts` config in `vite.config.js`.
+
+---
+
+## 5. Current Status & Next Steps
 - The foundational architecture is 100% complete and working.
+- A critical bug was patched where the Genesis Block was not being instantiated on the first empty database boot.
 - Users can register, login, view candidates, cast exactly one vote, and view results.
 - Admins can add candidates, view the blockchain data, and validate cryptographic integrity.
 
